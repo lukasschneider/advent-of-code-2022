@@ -107,7 +107,7 @@ func CalcScorePredict(data []string) uint32 {
 			decider.Win:  WON + ROCK,
 		},
 		enemy.Paper: {
-			decider.Loss: LOSS + SCISSORS,
+			decider.Loss: LOSS + ROCK,
 			decider.Draw: DRAW + PAPER,
 			decider.Win:  WON + SCISSORS,
 		},
@@ -121,7 +121,6 @@ func CalcScorePredict(data []string) uint32 {
 		if ok {
 			value, ok := scoreMap[last]
 			if ok {
-				fmt.Println(value)
 				score += value
 			} else {
 				log.Fatalf("last not found in scoreMap: %c\n", last)
