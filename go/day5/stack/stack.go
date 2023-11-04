@@ -4,12 +4,22 @@ import (
 	"errors"
 )
 
-type Stack[T any] struct {
+type Number interface {
+    uint8 | int16 | int32 | int64 
+}
+
+
+type Stack[T Number] struct {
     memory []T
 }
 
-func New[T any]() *Stack[T] {
-    return &Stack[T]{}
+func New[T Number](elems ...T) *Stack[T] {
+    stack := &Stack[T]{}
+    for _, e := range elems {
+        stack.Push(e)
+    }
+
+    return stack
 }
 
 func (stack *Stack[T]) Push(v T) {
@@ -18,7 +28,7 @@ func (stack *Stack[T]) Push(v T) {
 
 func (stack *Stack[T]) Pop() (T, error) {
     if stack.IsEmpty() {
-        return stack.memory[0], errors.New("Stack is empty")
+        return 0, errors.New("Stack is empty")
     }
     var item T = stack.memory[len(stack.memory) -1]
     stack.memory = stack.memory[:len(stack.memory) -1]
@@ -31,7 +41,7 @@ func (stack *Stack[T]) IsEmpty() bool {
 
 func (stack *Stack[T]) Peek() (T, error) {
     if stack.IsEmpty() {
-        return stack.memory[0], errors.New("Stack is empty")
+        return 0, errors.New("Stack is empty")
     }
     return stack.memory[len(stack.memory) -1], nil
 }
