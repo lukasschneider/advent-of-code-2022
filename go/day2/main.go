@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+    "time"
 )
 
 type game struct {
@@ -29,7 +30,7 @@ const (
 )
 
 func CalcScore(data []string) uint32 {
-
+    start := time.Now()
 	enemy := game{
 		Rock:     'A',
 		Paper:    'B',
@@ -77,11 +78,13 @@ func CalcScore(data []string) uint32 {
 			log.Fatalf("first not found in scoreTable: %c\n", first)
 		}
 	}
-
+    
+    fmt.Printf("CalcScore took %v\n", time.Since(start))
 	return score
 }
 
 func CalcScorePredict(data []string) uint32 {
+    start := time.Now()
 	var score uint32 = 0
 	enemy := game{
 		Rock:     'A',
@@ -129,6 +132,7 @@ func CalcScorePredict(data []string) uint32 {
 			log.Fatalf("first not found in scoreTable: %c\n", first)
 		}
 	}
+    fmt.Printf("CalcScorePredict took %v\n", time.Since(start))
 
 	return score
 }

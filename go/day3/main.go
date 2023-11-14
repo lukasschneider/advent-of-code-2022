@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"strings"
+    "time"
 )
 
 func FindCommonChar(stringsToCompare ...string) uint32 {
@@ -38,6 +39,7 @@ func FindCommonChar(stringsToCompare ...string) uint32 {
 }
 
 func part1(data []string) uint32 {
+    start := time.Now()
 	var score uint32 = 0
 
 	for _, line := range data {
@@ -46,15 +48,18 @@ func part1(data []string) uint32 {
 		comp2 := line[slice:]
 		score += FindCommonChar(comp1, comp2)
 	}
+    fmt.Printf("Part1: %v\n", time.Since(start))
 
 	return score
 }
 
 func part2(data []string) uint32 {
+    start := time.Now()
 	var score uint32 = 0
 	for i := 0; i < len(data); i += 3 {
 		score += FindCommonChar(data[i], data[i+1], data[i+2])
 	}
+    fmt.Printf("Part2: %v\n", time.Since(start))
 	return score
 }
 

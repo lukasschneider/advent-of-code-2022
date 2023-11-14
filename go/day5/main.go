@@ -1,15 +1,16 @@
 package main
 
 import (
-    "bufio"
-    "day5/stack"
-    "errors"
-    "fmt"
-    "log"
-    "os"
-    "sort"
-    "strconv"
-    "strings"
+	"bufio"
+	"day5/stack"
+	"errors"
+	"fmt"
+	"log"
+	"os"
+	"sort"
+	"strconv"
+	"strings"
+	"time"
 )
 
 type instruction struct {
@@ -83,6 +84,7 @@ func cratemoover9001(insLookUp map[int]*stack.Stack[byte], ins *instruction) err
 
 func part1() {
 
+    start := time.Now()
     var insLookUp = map[int]*stack.Stack[byte] {
         1: stack.New[byte]('Q', 'W', 'P', 'S', 'Z', 'R', 'H', 'D'),
         2: stack.New[byte]('V', 'B', 'R', 'W', 'Q', 'H', 'F'),
@@ -106,10 +108,12 @@ func part1() {
     if err != nil {
         log.Fatal(err, "Could not get result")
     }
+    fmt.Printf("Part 1 took %s\n", time.Since(start))
     fmt.Printf("Result: %s\n", result)
 }
 
 func part2() {
+    start := time.Now()
     var insLookUp = map[int]*stack.Stack[byte] {
         1: stack.New[byte]('Q', 'W', 'P', 'S', 'Z', 'R', 'H', 'D'),
         2: stack.New[byte]('V', 'B', 'R', 'W', 'Q', 'H', 'F'),
@@ -133,6 +137,8 @@ func part2() {
     if err != nil {
         log.Fatal(err, "Could not get result")
     }
+
+    fmt.Printf("Part 2 took %s\n", time.Since(start))
     fmt.Printf("Result: %s\n", result)
 }
 

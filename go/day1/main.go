@@ -1,13 +1,14 @@
-package main 
+package main
 
 import (
-    "bufio"
-    "fmt"
-    "log"
-    "os"
-    "strconv"
-    "cmp"
-    "slices"
+	"bufio"
+	"cmp"
+	"fmt"
+	"log"
+	"os"
+	"slices"
+	"strconv"
+	"time"
 )
 
 func main() {
@@ -38,6 +39,7 @@ func main() {
         }
     }
 
+    start := time.Now()
     slices.SortStableFunc(data, func(a, b uint32) int {
         return cmp.Compare(b, a)
     })
@@ -48,6 +50,7 @@ func main() {
     }
 
     var top uint32 = data[0] + data[1] + data[2]
+    fmt.Printf("Time: %v\n", time.Since(start))
     fmt.Printf("Max: %v\n", data[0])
     fmt.Printf("Top: %v\n", top)
 }

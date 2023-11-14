@@ -7,9 +7,11 @@ import (
 	"os"
 	"strconv"
 	"strings"
+    "time"
 )
 
 func part1(data []byte) uint32 {
+    start := time.Now()
 	var count uint32 = 0
 	for i := 0; i < len(data); i += 4 {
 		if (data[i] >= data[i+2]) && (data[i+1] <= data[i+3]) {
@@ -18,10 +20,12 @@ func part1(data []byte) uint32 {
 			count++
 		}
 	}
+    fmt.Printf("part1 took %v\n", time.Since(start))
 	return count
 }
 
 func part2(data []byte) uint32 {
+    start := time.Now()
 	var count uint32 = 0
 
 	for i := 0; i < len(data); i += 4 {
@@ -29,7 +33,7 @@ func part2(data []byte) uint32 {
 			count++
 		}
 	}
-
+    fmt.Printf("part2 took %v\n", time.Since(start))
 	return count
 }
 
