@@ -2,36 +2,31 @@ package main
 
 import (
     "bufio"
-    "errors"
     "fmt"
     "log"
     "os"
+    "time"
+    "slices"
 )
 
-type vec struct {
-    arr [4]byte
-}
 
-func (vec *vec) contains(c byte) bool {
-    for _, e := range vec.arr {
-        if  e == c {
-            return true;
+
+func findMarker(data string, number int) (int, byte) {
+    for i := range data {
+        distinct_chars := make([]byte, number)
+        j := 0
+        for ; j < number; j++ {
+            if !slices.Contains(distinct_chars, data[i+j]) {
+                distinct_chars[j] = data[i+j]
+            } else {
+                break;
+            }
+        }
+        if j == number {
+            return i+j, data[i+j]
         }
     }
-    return false
-}
-func (vec *vec) append(c byte) {
-    
-}
-
-func part1(data string) (int, error) {
-    var distinc_char vec
-    for _, c := range data {
-        if !distinc_char.contains(byte(c)) {
-
-        }
-    }
-    return 0, errors.New("No j in given string")
+    return 0, 0
 }
 
 
@@ -42,13 +37,19 @@ func main() {
         log.Fatal(err)
     }
 
+    var data string
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
-        pos, err := part1(scanner.Text())
-        if err != nil {
-            log.Fatal(err)
-        }
-        fmt.Printf("Positon of j: %v\n", pos)
+        data = scanner.Text()
     }
 
+    start := time.Now()
+    pos, val := findMarker(data, 4)
+    fmt.Printf("Time for part1: %s\n", time.Since(start))
+    fmt.Printf("Positon of %c: %v\n",val, pos)
+
+    start = time.Now()
+    pos, val = findMarker(data, 14)
+    fmt.Printf("Time for part2: %s\n", time.Since(start))
+    fmt.Printf("Positon of %c: %v\n",val, pos)
 }
